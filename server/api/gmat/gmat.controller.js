@@ -52,7 +52,7 @@ export function editQuestion(req, res) {
 export function postQuestionPack(req, res) {
   var post = {
     available_time: req.body.available_time,
-    question_ids: req.body.questions_ids,
+    question_ids: req.body.question_ids,
     level : req.body.level
   };
   QuestionPack.create(post, function(err,data) {
