@@ -5,6 +5,7 @@
 'use strict';
 import Question from './question.model';
 import QuestionPack from './question_pack.model'
+import User from './user.model'
 
 export function getQuestions(req, res) {
   Question.find(function (err, questions) {
@@ -83,4 +84,26 @@ export function editQuestionPack(req, res) {
             res.json({err,product})
         });
     })
+}
+
+export function login(req, res){
+    var isLogin= false;
+    User.findOne( {user_name:req.body.user_name},function (err, data) {
+        if(data.password == req.body.password){
+            isLogin= true;
+        }
+    }).then(function(){
+        if(isLogin){
+            res.json({
+                login_message: "Login Success",
+                login_status: 1
+            });
+        } else {
+            res.json({
+                login_message: "Login Failed",
+                login_status: 0
+            });
+        }
+    });
+
 }

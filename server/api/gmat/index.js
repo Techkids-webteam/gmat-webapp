@@ -13,6 +13,7 @@ router.get('/question_packs', controller.getQuestionPacks);
 //post
 router.post('/post-question', controller.postQuestion);
 router.post('/post-question-pack', controller.postQuestionPack);
+router.post('/login', controller.login);
 //delete
 router.post('/delete-question', controller.deleteQuestion);
 router.post('/delete-question-pack', controller.deleteQuestionPack);
