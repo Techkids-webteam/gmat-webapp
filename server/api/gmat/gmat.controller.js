@@ -14,12 +14,9 @@ export function getQuestions(req, res) {
 }
 
 export function getQuestionById(req, res) {
-  Question.findOne(
-    {id:req.params._id},
-    function (err, data) {
+  Question.findById(req.params.id,function (err, data) {
       res.json({err, data})
-    }
-  )
+  })
 }
 
 
@@ -77,12 +74,9 @@ export function getQuestionPacks(req, res) {
 }
 
 export function getQuestionPackById(req, res) {
-  QuestionPack.findOne(
-    {id:req.params._id},
-    function (err, data) {
+  QuestionPack.findById(req.params.id,function (err, data) {
       res.json({err, data})
-    }
-  )
+  })
 }
 
 export function deleteQuestionPack(req, res) {
