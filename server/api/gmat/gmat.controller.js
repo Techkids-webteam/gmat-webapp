@@ -13,6 +13,15 @@ export function getQuestions(req, res) {
   });
 }
 
+export function getQuestionById(req, res) {
+  Question.findOne(
+    {id:req.params._id},
+    function (err, data) {
+      res.json({err, data})
+    }
+  )
+}
+
 
 export function postQuestion(req, res) {
   var post = {
@@ -65,6 +74,15 @@ export function getQuestionPacks(req, res) {
   QuestionPack.find(function (err, question_packs) {
     res.json({question_packs});
   });
+}
+
+export function getQuestionPackById(req, res) {
+  QuestionPack.findOne(
+    {id:req.params._id},
+    function (err, data) {
+      res.json({err, data})
+    }
+  )
 }
 
 export function deleteQuestionPack(req, res) {

@@ -11,14 +11,17 @@ import mongoose from 'mongoose';
 
 // Setup server
 var app = express();
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+    next();
+});
 var server = http.createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 app.use(function(req, res, next) {
-res.setHeader('Access-Control-Allow-Origin', '*');
-res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
-next();
+
 });
 
 // Connect mongo
