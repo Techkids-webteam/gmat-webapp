@@ -7,94 +7,138 @@ import Question from './question.model';
 import QuestionPack from './question_pack.model'
 import User from './user.model'
 
+//Question
+
 export function getQuestions(req, res) {
-  Question.find(function (err, questions) {
-    res.json({questions});
-  });
+    Question.find(function (err, questions) {
+        if(err){
+            res.send(404);
+        }else{
+            res.json({questions});
+        }
+    });
 }
 
 export function getQuestionById(req, res) {
   Question.findById(req.params.id,function (err, data) {
-      res.json({err, data})
+      if(err){
+          res.send(404);
+      }else{
+          res.json({data})
+      }
   })
 }
 
 
 export function postQuestion(req, res) {
-  var post = {
-    type : req.body.type,
-    sub_type: req.body.sub_type,
-    stimulus: req.body.stimulus,
-    stem: req.body.stem,
-    answer_choices: req.body.answer_choices,
-    right_answer: req.body.right_answer
-  };
-  Question.create(post, function(err,data) {
-    return res.json({err,data});
-  })
+    var post = {
+        type : req.body.type,
+        sub_type: req.body.sub_type,
+        stimulus: req.body.stimulus,
+        stem: req.body.stem,
+        answer_choices: req.body.answer_choices,
+        right_answer: req.body.right_answer
+    };
+    Question.create(post, function(err,data) {
+        if(err){
+            res.send(404);
+        }else{
+            return res.json({data});
+        }
+    })
 }
 
 export function deleteQuestion(req, res) {
-    Question.findById(req.body._id, function (err, product) {
-        product.remove(function (err, product) {
-            res.json({err,product});
-    });
-  })
+    Question.findById(req.params.id, function (err, product) {
+        if(err){
+            res.send(404);
+        }else{
+            product.remove(function (err, product) {
+                res.json({product});
+            })
+        }
+    })
 }
 
 export function editQuestion(req, res) {
-    Question.findById(req.body._id, function (err,product) {
-        product.type = req.body.type;
-        product.sub_type = req.body.sub_type;
-        product.stimulus = req.body.stimulus;
-        product.stem =  req.body.stem;
-        product.answer_choices = req.body.answer_choices;
-        product.right_answer = req.body.right_answer;
-        product.save(function(err,product){
-            res.json({err,product})
-        });
+    Question.findById(req.params.id, function (err,product) {
+        if(err){
+            res.send(404);
+        }else{
+            product.type = req.body.type;
+            product.sub_type = req.body.sub_type;
+            product.stimulus = req.body.stimulus;
+            product.stem =  req.body.stem;
+            product.answer_choices = req.body.answer_choices;
+            product.right_answer = req.body.right_answer;
+            product.save(function(err,product){
+                res.json({product})
+            });
+        }
+    })
+}
+
+// Question Pack
+
+export function getQuestionPacks(req, res) {
+    QuestionPack.find(function (err, question_packs) {
+        if(err){
+            res.send(404);
+        }else{
+            res.json({question_packs});
+        }
+    });
+}
+
+export function getQuestionPackById(req, res) {
+    QuestionPack.findById(req.params.id,function (err, data) {
+        if(err){
+            res.send(404);
+        }else{
+            res.json({data});
+        }
     })
 }
 
 export function postQuestionPack(req, res) {
-  var post = {
-    available_time: req.body.available_time,
-    question_ids: req.body.question_ids,
-    level : req.body.level
-  };
-  QuestionPack.create(post, function(err,data) {
-    return res.json({err,data});
-  })
-}
-
-export function getQuestionPacks(req, res) {
-  QuestionPack.find(function (err, question_packs) {
-    res.json({question_packs});
-  });
-}
-
-export function getQuestionPackById(req, res) {
-  QuestionPack.findById(req.params.id,function (err, data) {
-      res.json({err, data})
+    var post = {
+        available_time: req.body.available_time,
+        question_ids: req.body.question_ids,
+        level : req.body.level
+    };
+    QuestionPack.create(post, function(err,data) {
+        if(err){
+            res.send(404);
+        }else{
+            return res.json({data});
+        }
   })
 }
 
 export function deleteQuestionPack(req, res) {
-    QuestionPack.findById(req.body._id, function (err, product) {
-        product.remove(function (err, product) {
-            res.json({err,product});
-    });
-  })
+    QuestionPack.findById(req.params.id, function (err, product) {
+        if(err){
+            res.send(404);
+        }else{
+            product.remove(function (err, product) {
+                res.json({product});
+            });
+        }
+    })
 }
 
 export function editQuestionPack(req, res) {
-    QuestionPack.findById(req.body._id, function (err,product) {
-        product.available_time = req.body.available_time;
-        product.question_ids = req.body.question_ids;
-        product.level = req.body.level;
-        product.save(function(err,product){
-            res.json({err,product})
-        });
+    QuestionPack.findById(req.params.id, function (err,product) {
+        if(err){
+            res.send(404);
+        }else{
+            product.available_time = req.body.available_time;
+            product.question_ids = req.body.question_ids;
+            product.level = req.body.level;
+            product.save(function(err,product){
+                res.json({product})
+            });
+        }
     })
 }
 
