@@ -11,10 +11,12 @@ var router = express.Router();
 router.get('/questions', controller.getQuestions);
 router.get('/question_types', controller.getQuestionType);
 router.get('/question_packs', controller.getQuestionPacks);
+router.get('/types', controller.getTypes);
 
 //get one
 router.get('/questions/:id', controller.getQuestionById);
 router.get('/question_packs/:id',controller.getQuestionPackById);
+router.get('/types/:code', controller.getTypeByCode);
 
 //post
 router.post('/post-question', controller.postQuestion);

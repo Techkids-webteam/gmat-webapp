@@ -1,6 +1,3 @@
-/**
- * Created by Admin on 10/06/2016.
- */
 'use strict';
 import mongoose from 'mongoose';
 

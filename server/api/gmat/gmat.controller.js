@@ -6,6 +6,7 @@
 import Question from './question.model';
 import QuestionPack from './question_pack.model'
 import User from './user.model'
+import QuestionType from './question_type.model'
 
 //Question
 
@@ -175,5 +176,24 @@ export function login(req, res){
             });
         }
     });
+}
 
+export function getTypes(req, res){
+    QuestionType.find(function(err, question_types){
+        if(err){
+            res.send(404);
+        }else{
+            res.json({question_types});
+        }
+    })
+}
+
+export function getTypeByCode(req, res){
+    QuestionType.findOne({code:req.params.code}, function(err, question_type){
+        if(err){
+            res.send(404);
+        }else{
+            res.json(question_type);
+        }
+    })
 }
