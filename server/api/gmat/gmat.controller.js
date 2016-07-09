@@ -19,6 +19,20 @@ export function getQuestions(req, res) {
     });
 }
 
+export function getQuestionType(req,res){
+    var question_type = []
+    Question.find(function(err, questions){
+        if(err){
+            res.send(404);
+        }else{
+            for(var i = 0; i < questions.length; i++){
+                question_type.push(questions[i].type)
+            }
+            res.json({question_type});
+        }
+    });
+}
+
 export function getQuestionById(req, res) {
   Question.findById(req.params.id,function (err, data) {
       if(err){

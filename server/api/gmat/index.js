@@ -9,6 +9,7 @@ var controller = require('./gmat.controller.js');
 var router = express.Router();
 //get all
 router.get('/questions', controller.getQuestions);
+router.get('/question_types', controller.getQuestionType);
 router.get('/question_packs', controller.getQuestionPacks);
 
 //get one
